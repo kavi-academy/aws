@@ -1,0 +1,41 @@
+=============main.py===========
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+# Define the input data model
+class JobData(BaseModel):
+    job: str
+    repo: str
+
+# Create FastAPI app
+app = FastAPI()
+
+# Define the API endpoint
+@app.post("/submit-job")
+async def submit_job(data: JobData):
+    # You can add processing logic here
+    return {
+        "message": "Job submitted successfully!",
+        "received_data": {
+            "job": data.job,
+            "repo": data.repo
+        }
+    }
+
+=======================================
+
+
+
+sudo apt update
+sudo apt install python3-pip -y
+pip3 install fastapi uvicorn
+
+uvicorn main:app --host 0.0.0.0 --port 8000
+
+=========================================
+
+SG: tcp - port - 8000 - 0.0.0.0/0
+
+================================
+
+when i try to connct the appliction pi using 0.0.0.0 ip address in ec2 SG it si woring, but i updated to my ip adress lie 192.152.1.11/32, it is not allowing
