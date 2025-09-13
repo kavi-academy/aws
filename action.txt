@@ -37,5 +37,22 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 SG: tcp - port - 8000 - 0.0.0.0/0
 
 ================================
+==powershell script to call:===
+
+$headers = @{
+    "Content-Type" = "application/json"
+}
+
+$body = @{
+    job = "data-processing"
+    repo = "https://github.com/example/repo"
+} | ConvertTo-Json
+
+Invoke-WebRequest -Uri "http://3.82.249.216:8000/submit-job" -Method POST -Headers $headers -Body $body
+
+===============================================================
 
 when i try to connct the appliction pi using 0.0.0.0 ip address in ec2 SG it si woring, but i updated to my ip adress lie 192.152.1.11/32, it is not allowing
+
+https://medium.com/israeli-tech-radar/use-github-actions-and-terraform-to-provision-ec2-instance-5b51636e4e54
+
